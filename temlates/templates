@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnali Heritage Sites</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 40px; }
+        .container { max-width: 600px; background: #fff; padding: 20px; margin: auto; border-radius: 6px; margin-bottom: 20px; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        .btn { display: inline-block; padding: 10px 15px; background: #3498db; color: #fff; text-decoration: none; border-radius: 4px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div style="max-width: 600px; margin: auto;">
+        <h1>Karnali Heritage Sites</h1>
+        <a href="/add" class="btn">Add New Place & Photo</a>
+        <hr>
+
+        {% for place in places %}
+            <div class="container">
+                <h2>{{ place.title }}</h2>
+                <p><strong>Location:</strong> {{ place.location }}</p>
+                <img src="{{ place.image }}" alt="Heritage Photo">
+                <p>{{ place.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
