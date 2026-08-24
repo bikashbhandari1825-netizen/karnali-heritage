@@ -1,0 +1,55 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* माथिको नेभिगेसन बार (Navbar) को डिजाइन */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 20px 40px;
+    border-bottom: 2px solid #ff9f1a;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff9f1a;
+}
+
+.btn-plan {
+    background-color: #ff9f1a;
+    color: #121212 !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* मुख्य कन्टेनर र कार्डहरूको डिजाइन */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+    color: #ff9f1a;
+}
