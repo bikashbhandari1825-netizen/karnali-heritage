@@ -9,8 +9,8 @@ app = Flask(__name__)
 # Cloudinary Configuration (Free Cloud Storage for Photos)
 # These are standard test/development keys or your cloud settings
 cloudinary.config(
-    cloud_name = "cpqkwivuv,"
-    api_key = "181112397695712"
+    cloud_name = "cpqkwivuv",
+    api_key = "181112397695712",
     api_secret = "5uJ470j-rtrBl5T0Lcy6DlaPUqU"
 )
 
