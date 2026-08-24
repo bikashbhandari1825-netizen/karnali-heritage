@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karnali Heritage & Travel</title>
     <style>
-        /* Global Styles - Dark Theme */
         body {
             background-color: #121212;
             color: #ffffff;
@@ -13,8 +12,6 @@
             margin: 0;
             padding: 0;
         }
-
-        /* Top Navigation Bar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -23,7 +20,6 @@
             padding: 15px 50px;
             border-bottom: 1px solid #2a2a2a;
         }
-
         .nav-links a {
             color: #ffffff;
             text-decoration: none;
@@ -31,12 +27,9 @@
             font-size: 15px;
             font-weight: 500;
         }
-
         .nav-links a:hover {
             color: #ff9f1a;
         }
-
-        /* Action Button in Navbar */
         .btn-plan {
             background-color: #ff9f1a !important;
             color: #121212 !important;
@@ -44,34 +37,26 @@
             border-radius: 6px;
             font-weight: bold;
         }
-
-        /* Logo Styling */
         .logo {
             font-size: 20px;
             font-weight: bold;
             color: #ff9f1a;
             text-decoration: none;
         }
-
-        /* Hero Section Header */
         .hero-section {
             text-align: center;
             padding: 40px 20px;
         }
-
         .hero-section h1 {
             color: #ffffff;
             font-size: 32px;
             margin-bottom: 10px;
         }
-
         .hero-section p {
             color: #b0b0b0;
             font-size: 16px;
             margin-bottom: 30px;
         }
-
-        /* Add Place Button */
         .btn-add {
             display: inline-block;
             background-color: #ff9f1a;
@@ -82,12 +67,9 @@
             font-weight: bold;
             margin-bottom: 40px;
         }
-
         .btn-add:hover {
             background-color: #e88b0d;
         }
-
-        /* Cards Grid Layout */
         .cards-grid {
             display: flex;
             flex-wrap: wrap;
@@ -97,8 +79,6 @@
             margin: 0 auto;
             padding: 20px;
         }
-
-        /* Individual Card Styling */
         .card {
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -107,34 +87,29 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             border: 1px solid #2a2a2a;
         }
-
         .card img {
             width: 100%;
             height: 220px;
             object-fit: cover;
         }
-
         .card-content {
             padding: 20px;
         }
-
         .card-content h2 {
             color: #ff9f1a;
             font-size: 22px;
             margin-top: 0;
             margin-bottom: 10px;
         }
-
         .card-content p {
             color: #cccccc;
             font-size: 14px;
-            line-height: 1.5;
+            line-align: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <!-- Professional Navigation Bar -->
     <nav>
         <div class="nav-links">
             <a href="#">Programs</a>
@@ -142,7 +117,7 @@
             <a href="#">About us</a>
         </div>
         
-        <a href="#" class="logo">🌍 KARNALI HERITAGE</a>
+        <a href="/" class="logo">🌍 KARNALI HERITAGE</a>
 
         <div class="nav-links">
             <a href="#">Information</a>
@@ -152,18 +127,17 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <div class="hero-section">
         <h1>Explore Karnali Heritage & Destinations</h1>
         <p>Discover the beauty, culture, and historic places through our professional travel guide.</p>
         <a href="{{ url_for('add_place') }}" class="btn-add">+ Add New Place & Photo</a>
     </div>
 
-    <!-- Dynamic Cards Section from Database -->
+    <!-- Dynamic Cards Section: Shows uploaded photos automatically -->
     <div class="cards-grid">
         {% for place in places %}
         <div class="card">
-            <!-- Correct image rendering path -->
+            <!-- This correctly links and displays the uploaded photo -->
             <img src="{{ url_for('static', filename='uploads/' + place.image) }}" alt="Heritage Photo">
             <div class="card-content">
                 <h2>{{ place.title }}</h2>
