@@ -138,7 +138,7 @@
         {% for place in places %}
         <div class="card">
             <!-- This correctly links and displays the uploaded photo -->
-            <img src="{{ url_for('static', filename='uploads/' + place.image) }}" alt="Heritage Photo">
+            <img src="{{ place.image }}" alt="Heritage Photo">
             <div class="card-content">
                 <h2>{{ place.title }}</h2>
                 <p><strong>Location:</strong> {{ place.location }}</p>
