@@ -10,8 +10,8 @@ app = Flask(__name__)
 # These are standard test/development keys or your cloud settings
 cloudinary.config(
     cloud_name = "cpqkwivuv,"
-    api_key = 181112397695712
-    api_secret = 5uJ470j-rtrBl5T0Lcy6DlaPUqU
+    api_key = "181112397695712"
+    api_secret = "5uJ470j-rtrBl5T0Lcy6DlaPUqU"
 )
 
 # Database configuration
