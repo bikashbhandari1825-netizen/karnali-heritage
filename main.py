@@ -57,7 +57,6 @@ with app.app_context():
 
 # Home Route: Displays all uploaded places with permanent cloud images
 @app.route("/")
-@app.route("/")
 def index():
     connection = get_db()
     cursor = connection.cursor()
