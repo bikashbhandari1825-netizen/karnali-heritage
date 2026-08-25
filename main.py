@@ -1,26 +1,31 @@
 import os
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
-import cloudinary
-import cloudinary.uploader
-
 app = Flask(__name__)
 
 # Cloudinary Configuration (Free Cloud Storage for Photos)
 # These are standard test/development keys or your cloud settings
 import os
-import cloudinary
-import cloudinary.uploader
+from importlib import import_module
 
-cloudinary.config(
-    cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    api_key = os.environ.get("CLOUDINARY_API_KEY"),
-    api_secret = os.environ.get("CLOUDINARY_API_SECRET")
-)
+cloudinary = None
+cloudinary_uploader = None
+if os.environ.get("CLOUDINARY_CLOUD_NAME"):
+    cloudinary = import_module("cloudinary")
+    cloudinary_uploader = import_module("cloudinary.uploader")
 
-import os
-import psycopg2
-import psycopg2.extras
+if cloudinary:
+    cloudinary.config(
+        cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+        api_key=os.environ.get("CLOUDINARY_API_KEY"),
+        api_secret=os.environ.get("CLOUDINARY_API_SECRET")
+    )
+
+psycopg2 = None
+psycopg2_extras = None
+if os.environ.get("DATABASE_URL"):
+    psycopg2 = import_module("psycopg2")
+    psycopg2_extras = import_module("psycopg2.extras")
 
 # Get the cloud database URL from Render's environment variables
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -84,7 +89,7 @@ def add_place():
         cursor = connection.cursor()
         cursor.execute(
             "INSERT INTO place (title, location, image, description) VALUES (%s, %s, %s, %s)",
-            (title, location, image, description)
+            (title, location, image_url, description)
         )
         connection.commit()
         cursor.close()
