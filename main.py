@@ -82,13 +82,14 @@ def add_place():
             image_url = upload_result.get("secure_url")
 
             connection = get_db()
-            connection.execute(
-                "INSERT INTO place (title, location, image, description) VALUES (?, ?, ?, ?)",
-                (title, location, image_url, description)
-            )
-            connection.commit()
-            connection.close()
-            return redirect(url_for("index"))
+    cursor = connection.cursor()
+    cursor.execute(
+        "INSERT INTO place (title, location, image, description) VALUES (%s, %s, %s, %s)",
+        (title, location, image_url, description)
+    )
+    connection.commit()
+    cursor.close()
+    connection.close()
 
     return render_template("add.html")
 
