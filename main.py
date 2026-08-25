@@ -70,28 +70,28 @@ def index():
 # Add Place Route: Uploads image directly to Cloudinary
 @app.route("/add", methods=("GET", "POST"))
 def add_place():
+    connection = get_db()
     if request.method == "POST":
         title = request.form["title"]
         location = request.form["location"]
         description = request.form["description"]
         image_file = request.files["image"]
 
+        image_url = None
         if image_file:
-            # Upload image to Cloudinary cloud storage
             upload_result = cloudinary.uploader.upload(image_file)
             image_url = upload_result.get("secure_url")
 
-            connection = get_db()
-    cursor = connection.cursor()
-    cursor.execute(
-        "INSERT INTO place (title, location, image, description) VALUES (%s, %s, %s, %s)",
-        (title, location, image_url, description)
-    )
-    connection.commit()
-    cursor.close()
-    connection.close()
+        cursor = connection.cursor()
+        cursor.execute(
+            "INSERT INTO place (title, location, image, description) VALUES (%s, %s, %s, %s)",
+            (title, location, image_url, description)
+        )
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return redirect(url_for("index"))
 
     return render_template("add.html")
-
 if __name__ == "__main__":
     app.run(debug=True)
