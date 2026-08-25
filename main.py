@@ -99,24 +99,25 @@ def add_place():
         description = request.form["description"]
         image_file = request.files.get("image")
 
-        image_url = None
+        image_url = ""
         if image_file and cloudinary:
             upload_result = cloudinary.uploader.upload(image_file)
             image_url = upload_result.get("secure_url")
 
-        placeholder = get_insert_placeholder()
         cursor = connection.cursor()
-        cursor.execute(
-            f"INSERT INTO place (title, location, image, description) VALUES ({placeholder}, {placeholder}, {placeholder}, {placeholder})",
-            (title, location, image_url, description),
-        )
+        if DATABASE_URL:
+            cursor.execute(
+                "INSERT INTO place (title, location, image, description) VALUES (%s, %s, %s, %s)",
+                (title, location, image_url, description)
+            )
+        else:
+            cursor.execute(
+                "INSERT INTO place (title, location, image, description) VALUES (?, ?, ?, ?)",
+                (title, location, image_url, description)
+            )
         connection.commit()
         cursor.close()
         connection.close()
         return redirect(url_for("index"))
 
-    return render_template("add.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    
