@@ -57,9 +57,13 @@ with app.app_context():
 
 # Home Route: Displays all uploaded places with permanent cloud images
 @app.route("/")
+@app.route("/")
 def index():
     connection = get_db()
-    places = connection.execute("SELECT * FROM place").fetchall()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM place")
+    places = cursor.fetchall()
+    cursor.close()
     connection.close()
     return render_template("index.html", places=places)
 
