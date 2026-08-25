@@ -18,14 +18,25 @@ cloudinary.config(
     api_secret = os.environ.get("CLOUDINARY_API_SECRET")
 )
 
-# Database configuration
-DATABASE = os.path.join(app.instance_path, "heritage.db")
+import os
+import psycopg2
+import psycopg2.extras
+
+# Get the cloud database URL from Render's environment variables
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
-    os.makedirs(app.instance_path, exist_ok=True)
-    connection = sqlite3.connect(DATABASE)
-    connection.row_factory = sqlite3.Row
-    return connection
+    if DATABASE_URL:
+        # If running on Render, connect to the Neon Cloud PostgreSQL database
+        connection = psycopg2.connect(DATABASE_URL)
+        connection.cursor_factory = psycopg2.extras.RealDictCursor
+        return connection
+    else:
+        # If running locally on your laptop, use SQLite as a fallback
+        os.makedirs(app.instance_path, exist_ok=True)
+        connection = sqlite3.connect(os.path.join(app.instance_path, "heritage.db"))
+        connection.row_factory = sqlite3.Row
+        return connection
 
 # Create database table automatically if not exists
 with app.app_context():
