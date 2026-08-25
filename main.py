@@ -37,21 +37,23 @@ def get_db():
         connection = sqlite3.connect(os.path.join(app.instance_path, "heritage.db"))
         connection.row_factory = sqlite3.Row
         return connection
-
+# Create database table automatically if not exists
 # Create database table automatically if not exists
 with app.app_context():
     connection = get_db()
-    connection.execute("""
+    cursor = connection.cursor()
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS place (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            location TEXT NOT NULL,
-            image TEXT NOT NULL,
-            description TEXT NOT NULL
+            id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            description TEXT,
+            image_url TEXT
         )
     """)
     connection.commit()
-    connection.close()
+    cursor.close()
+    connection.close() 
+    
 
 # Home Route: Displays all uploaded places with permanent cloud images
 @app.route("/")
