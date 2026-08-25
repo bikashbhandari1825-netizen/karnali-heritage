@@ -84,7 +84,7 @@ def add_place():
         cursor = connection.cursor()
         cursor.execute(
             "INSERT INTO place (title, location, image, description) VALUES (%s, %s, %s, %s)",
-            (title, location, image_url, description)
+            (title, location, image, description)
         )
         connection.commit()
         cursor.close()
